@@ -4,7 +4,9 @@ Slackbot for interacting with [soundboard-webserver](https://github.com/beverts3
 
 
 ### Config  
-The slack token should be set as the `SLACK_TOKEN` environmental variable before building  
+Config should be set as environmental variables prior to building.
+* `SOUNDBOARD_URL` - base url for the webserver
+* `SLACK_TOKEN` - verification token for slack
 
 ### Deploy  
 If the `gcloud` cli is installed & configured simply run `npm run deploy`
