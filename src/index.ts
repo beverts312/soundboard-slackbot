@@ -2,8 +2,10 @@ import { Response } from 'express';
 import { CloudHttpFunction, SlackEvent } from './models';
 import { SlackBot } from './slackbot';
 
+const config = require('./config.json');
+
 export const botHandler: CloudHttpFunction = (req, res) => {
-    const bot = new SlackBot(require('./config.json'));
+    const bot = new SlackBot(config.token);
     bot.registerCommand('soundboard', {
         handlers: {
             list: (event: SlackEvent, res: Response) => {

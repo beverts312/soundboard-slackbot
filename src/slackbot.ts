@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { Config, SlackEvent, CommandHandler } from './models';
+import { SlackEvent, CommandHandler } from './models';
 
 export class SlackBot {
     private commandHandlers: { [key: string] : CommandHandler } = {};
 
-    constructor(private config: Config) {}
+    constructor(private token: string) {}
 
     public processMessage(req: Request, res: Response): void {
         const event: SlackEvent = req.body;
@@ -26,7 +26,7 @@ export class SlackBot {
     }
 
     private verifyRequest(body: SlackEvent): void {
-        if (!body || body.token !== this.config.token) {
+        if (!body || body.token !== this.token) {
             throw new Error('Invalid Slack credentials');
         }
         if (!this.commandHandlers[this.getCommand(body)]) {
