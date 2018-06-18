@@ -1,11 +1,10 @@
-import { Response } from 'express';
-import { CloudHttpFunction, SlackEvent } from './models';
-import { SlackBot } from './slackbot';
+import { Response, Request } from 'express';
+import { SlackBot, SlackEvent } from '@swellaby/slashhandler';
 import { Soundboard } from './soundboard';
 
 const config = require('./config.json');
 
-export const botHandler: CloudHttpFunction = (req, res) => {
+export const botHandler: (req: Request, res: Response) => void = (req, res) => {
     const bot = new SlackBot(config.token);
     const soundboard = new Soundboard(config.soundboardUrl);
     bot.registerCommand('soundboard', {
